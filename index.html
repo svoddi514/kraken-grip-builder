@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Build Your Grip Kit — Kraken Grip (Prototype)</title>
+  <meta name="description" content="Clickable prototype: build your own Kraken Grip Kit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to builder</a>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand" aria-label="Kraken Grip">
+        <span class="brand__logo" aria-hidden="true">KRAKEN<span>GRIP</span></span>
+        <span class="brand__tag">Build Your Grip Kit</span>
+      </div>
+      <span class="proto-pill" title="This is a clickable mockup. Nothing is actually purchased.">Prototype</span>
+    </div>
+    <nav class="progress" aria-label="Progress">
+      <ol class="progress__list" id="progress"></ol>
+    </nav>
+  </header>
+
+  <main id="main" class="app" data-step="start">
+    <!-- STEP 1: choose a starting point -->
+    <section id="step-start" class="step step--start" aria-labelledby="h-start">
+      <div class="step__intro">
+        <h1 id="h-start" class="step__title" tabindex="-1">Pick Your Grip Kit</h1>
+        <p class="step__lead">Tap a kit to grab it — or build your own colors.</p>
+      </div>
+      <div class="kit-grid" id="kit-grid"></div>
+    </section>
+
+    <!-- STEPS 2 + 3 share the live preview -->
+    <div class="builder">
+      <aside class="preview-panel" aria-label="Live preview of your kit">
+        <div class="preview-stage" id="stage" role="img" aria-label="Your kit preview">
+          <!-- Layers are injected by app.js:
+               img.layer--bag (z1) · img.layer--spray (z2) · img.layer--case (z3)
+               img.layer--stick (z4) · img.layer--scraper (z5) · img.layer--rosin (z6) -->
+          <span class="placeholder-badge" id="placeholder-badge" hidden>Placeholder art</span>
+          <span class="item-count" id="item-count">5 items</span>
+        </div>
+      </aside>
+
+      <div class="builder__main">
+        <!-- STEP 2: customize -->
+        <section id="step-customize" class="step step--customize" aria-labelledby="h-customize" hidden>
+          <div class="step__intro">
+            <h1 id="h-customize" class="step__title" tabindex="-1">Make It Yours</h1>
+            <p class="step__lead">Tap <strong>Change Color</strong> on any item. Watch your kit change.</p>
+          </div>
+          <div class="summary-card">
+            <ul class="summary summary--edit" id="choices" aria-label="Kit items"></ul>
+            <ul class="summary summary--included" id="included" aria-label="Also in every kit"></ul>
+          </div>
+        </section>
+
+        <!-- STEP 3: review -->
+        <section id="step-review" class="step step--review" aria-labelledby="h-review" hidden>
+          <div class="step__intro">
+            <h1 id="h-review" class="step__title" tabindex="-1">Your Kit</h1>
+            <p class="kit-type-pill" id="kit-type"></p>
+          </div>
+          <div class="summary-card">
+            <ul class="summary" id="summary"></ul>
+            <div class="summary__price" id="summary-price"></div>
+          </div>
+          <details class="fulfillment">
+            <summary>Packing details (what gets sent with the order)</summary>
+            <pre id="fulfillment-json"></pre>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sticky action bar (price + next step) -->
+  <div class="actionbar" id="actionbar" hidden>
+    <div class="actionbar__inner">
+      <div class="price" aria-live="polite">
+        <s class="price__regular" id="price-regular" aria-label="Regular price"></s>
+        <strong class="price__kit" id="price-kit"></strong>
+        <span class="price__save" id="price-save"></span>
+      </div>
+      <div class="actionbar__buttons">
+        <button type="button" class="btn btn--ghost" id="btn-secondary"></button>
+        <button type="button" class="btn btn--cta" id="btn-primary"></button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" id="footer">
+    <p>Clickable prototype for Kraken Grip · no real cart · placeholder art where marked</p>
+    <label class="demo-toggle" id="demo-toggle" hidden>
+      <input type="checkbox" id="rosin-toggle">
+      <span>Demo: add Pine Rosin Bag (6th item)</span>
+    </label>
+  </footer>
+
+  <dialog class="cart-dialog" id="cart-dialog" aria-labelledby="h-cart">
+    <form method="dialog">
+      <div class="cart-dialog__icon" aria-hidden="true">✓</div>
+      <h2 id="h-cart">Kit added to cart!</h2>
+      <p class="cart-dialog__note">Prototype only — nothing was charged. These details would ride along with the order for packing:</p>
+      <dl class="props" id="cart-props"></dl>
+      <div class="cart-dialog__buttons">
+        <button class="btn btn--ghost" value="restart" type="submit">Build another kit</button>
+        <button class="btn btn--cta" value="close" type="submit">Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js?v=5"></script>
+</body>
+</html>
